@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   
   s.swift_version = '5.0'
   s.frameworks='Foundation','UIKit'
-  # s.dependency 'SwiftComponents', :git => 'https://github.com/LZRight123/SwiftComponents.git'
+  s.dependency 'SwiftComponents', :git => 'https://github.com/LZRight123/SwiftComponents.git'
   # 框架要求ARC环境下使用
   s.requires_arc = true
   # 设置 podspec 的默认 subspec
@@ -50,6 +50,7 @@ Pod::Spec.new do |s|
   # 鹿管家公用组件
   s.subspec 'Deer' do |ss|
     ss.source_files = 'BusinessComponents/Deer/**/*.swift'
+    # ss.dependency 'SwiftComponents', :git => 'https://github.com/LZRight123/SwiftComponents.git'
     # 框架包含的资源包
     # ss.resources  = 'BusinessComponents/BusinessComponents.bundle'
   end
