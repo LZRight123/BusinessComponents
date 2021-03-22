@@ -44,14 +44,14 @@ Pod::Spec.new do |s|
   
   # 二级目录（根目录是s，使用s.subspec设置子目录，这里设置子目录为ss）
   s.subspec 'Empty' do |ss|
-    ss.source_files = 'SwiftComponents/Empty/**/*.swift'
+    ss.source_files = 'BusinessComponents/Empty/**/*.swift'
   end 
    
   # 鹿管家公用组件
   s.subspec 'Deer' do |ss|
-    ss.source_files = 'SwiftComponents/Deer/**/*.swift'
+    ss.source_files = 'BusinessComponents/Deer/**/*.swift'
     # 框架包含的资源包
-    # ss.resources  = 'SwiftComponents/SwiftComponents/SwiftComponents.bundle'
+    # ss.resources  = 'BusinessComponents/BusinessComponents.bundle'
   end
  
 end
