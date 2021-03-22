@@ -1,0 +1,5 @@
+
+struct DeerTestBusiness {
+    var name = ""
+    
+}
