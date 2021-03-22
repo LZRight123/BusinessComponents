@@ -31,95 +31,27 @@ Pod::Spec.new do |s|
   
   s.swift_version = '5.0'
   s.frameworks='Foundation','UIKit'
-  # s.dependency "SwifterSwift"
-  
-  # 设置 podspec 的默认 subspec
-  s.default_subspecs = 'Extensions', 'service_rx', 'tools', 'router', 'rxcomponents'
-  
-  # 本地框架源文件的位置（包含所有文件）
-  # s.source_files  = "SwiftComponents/**/*.swift"
-  # 一级目录（pod库中根目录所含文件）
-  
-  # 每次都参与编译方便修改时 在子工程里写
-#  s.static_framework = true
-  # 二级目录（根目录是s，使用s.subspec设置子目录，这里设置子目录为ss）
-  s.subspec 'Extensions' do |ss|
-    ss.source_files = 'SwiftComponents/Extensions/**/*.swift'
-    # 框架包含的资源包
-    # ss.resources  = 'SwiftComponents/SwiftComponents/SwiftComponents.bundle'
-    # ss.subspec 'CoreGraphics' do |sss|
-    #   sss.source_files = 'SwiftComponents/Extensions/CoreGraphics/*.swift'
-    ss.dependency "SwifterSwift"
-  end
-
-  # 网络请求 数据解析
-  s.subspec 'service' do |ss|
-    ss.source_files = 'SwiftComponents/service/**/*.swift'
-
-    ss.dependency "Moya"#, "~> 13.0.0"
-    ss.dependency "KakaJSON"
-    ss.dependency "SwiftyJSON"
-  end
-
-  s.subspec 'Cache' do |ss|
-    ss.source_files = 'SwiftComponents/Cache/**/*.swift'
-
-    ss.dependency 'YYCache'
-  end
-  
-  s.subspec 'service_rx' do |ss|
-    ss.source_files = 'SwiftComponents/service_rx/**/*.swift'
-    ss.dependency 'SwiftComponents/service'
-    ss.dependency "RxSwift", "~> 5.0"
-  end
-
-  # 工具类
-  s.subspec 'tools' do |ss|
-    ss.source_files = 'SwiftComponents/tools/**/*.swift'
-#    ss.public_header_files = 'SwiftComponents/tools/**/*.h'
-    ss.dependency "SnapKit"
-    ss.dependency "Kingfisher"
-    ss.dependency "MBProgressHUD"
-    ss.dependency "KakaJSON"
-    ss.dependency "SwiftyJSON"
-#    ss.dependency "RxSwift"
-    ss.dependency "SwiftComponents/Extensions"
-  end
-  
-  s.subspec 'router' do |ss|
-    ss.platform     = :ios, "9.0"
-
-    ss.source_files = 'SwiftComponents/router/*.swift'
-    ss.dependency "URLNavigator"
-  end
-  
-  # RX套件
-  s.subspec 'rxcomponents' do |ss|
-#    ss.static_framework = true
-    ss.source_files = 'SwiftComponents/RxComponents/**/*.swift'
-    
-    ss.dependency "RxSwift"
-    ss.dependency "RxCocoa"
-    ss.dependency "RxWebKit"
-    ss.dependency "RxDataSources"
-    ss.dependency "RxOptional"
-    ss.dependency "RxViewController"
-    ss.dependency "RxGesture"
-    ss.dependency "Moya/RxSwift"
-    ss.dependency "MJRefresh"
-    ss.dependency "MBProgressHUD"
-  end
-
-  # 鹿管家公用组件
-#  s.subspec 'LGJPublic' do |ss|
-#    ss.static_framework = true
-#    ss.source_files = 'SwiftComponents/LGJPublic/**/*.swift'
-#
-#  end
-
-
+  # s.dependency 'SwiftComponents', :git => 'https://github.com/LZRight123/SwiftComponents.git'
   # 框架要求ARC环境下使用
   s.requires_arc = true
-
+  # 设置 podspec 的默认 subspec
+  s.default_subspecs = 'Empty'
+  # 每次都参与编译方便修改
+  s.static_framework = true
+  # 本地框架源文件的位置（包含所有文件）
+  # s.source_files  = "BusinessComponents/**/*.swift"
+  # 一级目录（pod库中根目录所含文件）
+  
+  # 二级目录（根目录是s，使用s.subspec设置子目录，这里设置子目录为ss）
+  s.subspec 'Empty' do |ss|
+    ss.source_files = 'SwiftComponents/Empty/**/*.swift'
+  end 
+   
+  # 鹿管家公用组件
+  s.subspec 'Deer' do |ss|
+    ss.source_files = 'SwiftComponents/Deer/**/*.swift'
+    # 框架包含的资源包
+    # ss.resources  = 'SwiftComponents/SwiftComponents/SwiftComponents.bundle'
+  end
  
 end
