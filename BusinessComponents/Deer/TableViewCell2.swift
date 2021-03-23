@@ -9,5 +9,5 @@ import UIKit
 
 public class TableViewCell2: UITableViewCell {
 
-    
+   
 }

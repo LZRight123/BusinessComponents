@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
   # 框架要求ARC环境下使用
   s.requires_arc = true
   # 设置 podspec 的默认 subspec
-  # s.default_subspecs = 'Empty'
+  s.default_subspecs = 'Empty'
   # 每次都参与编译方便修改
   s.static_framework = true
   # 本地框架源文件的位置（包含所有文件）
@@ -44,15 +44,15 @@ Pod::Spec.new do |s|
   # 一级目录（pod库中根目录所含文件）
   
   # 二级目录（根目录是s，使用s.subspec设置子目录，这里设置子目录为ss）
-  # s.subspec 'Empty' do |ss|
-  #   ss.source_files = 'BusinessComponents/Empty/**/*.swift'
-  # end 
+  s.subspec 'Empty' do |ss|
+    ss.source_files = 'BusinessComponents/Empty/**/*.swift'
+  end 
    
   # 鹿管家公用组件
-  # s.subspec 'Deer' do |ss|
-    # ss.source_files = 'BusinessComponents/Deer/**/*.swift'
+  s.subspec 'Deer' do |ss|
+    ss.source_files = 'BusinessComponents/Deer/**/*.swift'
     # 框架包含的资源包
-    # ss.resources  = 'BusinessComponents/Deer/**/*.{xib,png}'
+    ss.resources  = 'BusinessComponents/Deer/**/*.{xib,png}'
 #    ss.resource_bundles = {
 #     'BusinessComponents' => ['BusinessComponents/Deer/*']
 #   }
