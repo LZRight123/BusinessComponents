@@ -1,13 +1,17 @@
 
 # git
 ```sh
+# 下载
 git clone https://github.com/LZRight123/BusinessComponents.git
 git submodule update --init --recursive
 # or
-git clone --recursive
+git clone --recursive https://github.com/LZRight123/BusinessComponents.git
 
-# add
+# 添加子模块
 git submodule add https://github.com/LZRight123/BusinessDeer.git
+
+# 更新子模块
+git submodule update --remote
 ```
 
 # use
