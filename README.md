@@ -13,6 +13,7 @@ git submodule add https://github.com/LZRight123/BusinessDeer.git
 # 更新子模块
 git submodule update --remote
 ```
+## [Git submodule的坑](https://blog.devtang.com/2013/05/08/git-submodule-issues/)
 
 # use
 1. pod update BusinessComponents --no-repo-update
