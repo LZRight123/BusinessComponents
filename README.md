@@ -8,6 +8,9 @@ git clone --recursive
 
 # add
 git submodule add https://github.com/LZRight123/BusinessDeer.git
+
+# push
+git add --all; git commit -m "update";git pull --rebase; git push
 ```
 
 # use
