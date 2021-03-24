@@ -1,17 +1,25 @@
 
 # git
 ```sh
+# 下载
 git clone https://github.com/LZRight123/BusinessComponents.git
 git submodule update --init --recursive
 # or
-git clone --recursive
+git clone --recursive https://github.com/LZRight123/BusinessComponents.git
 
-# add
+# 添加子模块
 git submodule add https://github.com/LZRight123/BusinessDeer.git
 
 # push
 git add --all; git commit -m "update";git pull --rebase; git push
+
+# 更新子模块
+git submodule update --remote
+# push
+git add --all; git commit -m "update";git pull --rebase; git push
+
 ```
+## [Git submodule的坑](https://blog.devtang.com/2013/05/08/git-submodule-issues/)
 
 # use
 1. pod update BusinessComponents --no-repo-update
