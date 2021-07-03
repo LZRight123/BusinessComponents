@@ -3,9 +3,6 @@
 ```sh
 # 下载
 git clone https://github.com/LZRight123/BusinessComponents.git
-git submodule update --init --recursive
-# or
-git clone --recursive https://github.com/LZRight123/BusinessComponents.git
 
 # 添加子模块
 git submodule add https://github.com/LZRight123/BusinessDeer.git
