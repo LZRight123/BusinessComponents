@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
     s.swift_version = '5.0'
     s.frameworks='Foundation','UIKit'
     s.dependency 'SwiftComponents'
-    # s.dependency 'YYText'
+    s.dependency 'AMapLocation-NO-IDFA' #高德定位
     # 框架要求ARC环境下使用
     s.requires_arc = true
     # 每次都参与编译方便修改
