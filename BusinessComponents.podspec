@@ -53,9 +53,6 @@ Pod::Spec.new do |s|
     ss.source_files = 'BusinessComponents/Deer/**/*.swift'
     # 框架包含的资源包
     ss.resources  = 'BusinessComponents/Deer/**/*.{xib,png}'
-#    ss.resource_bundles = {
-#     'BusinessComponents' => ['BusinessComponents/Deer/*']
-#   }
   end
  
 end
