@@ -18,6 +18,10 @@ git add --all; git commit -m "update";git pull; git push
 # use
 1. pod update BusinessComponents --no-repo-update
 2. pod 'BusinessComponents', :path => '../BusinessComponents'
+3. pod 'BusinessComponents/Deer', :git => 'https://github.com/LZRight123/BusinessComponents.git'
 
 ## 鹿管家公用组件
-1. pod 'BusinessComponents/Deer', :git => 'https://github.com/LZRight123/BusinessComponents.git'
+```pod
+pod 'BusinessDeer', :path => '../BusinessComponents/BusinessDeer'
+pod 'DeerLbs', :path => '../BusinessComponents/DeerLbs'
+```
