@@ -31,6 +31,12 @@ Pod::Spec.new do |s|
     s.frameworks='Foundation','UIKit'
     s.dependency 'SwiftComponents'
     s.dependency 'AMapLocation-NO-IDFA' #高德定位
+    s.dependency 'AMap3DMap-NO-IDFA' #高德定位 -NO-IDFA
+    s.dependency 'AMapSearch-NO-IDFA'
+
+    
+
+
     # 框架要求ARC环境下使用
     s.requires_arc = true
     # 每次都参与编译方便修改
