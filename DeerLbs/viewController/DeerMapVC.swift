@@ -75,7 +75,7 @@ open class DeerMapVC: UIViewController {
     }
     
     let model: NavgatorDetailModel
-    init(model: NavgatorDetailModel) {
+    public init(model: NavgatorDetailModel) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
     }

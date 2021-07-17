@@ -9,20 +9,24 @@ import Foundation
 import CoreLocation
 import SwiftComponents
 
-struct NavgatorDetailModel {
-    var address = "" // 外传
-    var geocode: AMapGeocode? //1 地址取point
-    var distanceResult: AMapDistanceResult?
+public struct NavgatorDetailModel {
+    public var address = "" // 外传
+    public var geocode: AMapGeocode? //1 地址取point
+    public var distanceResult: AMapDistanceResult?
     
-    var defaultCenter: CLLocationCoordinate2D {
+    public init(address: String) {
+        self.address = address
+    }
+    
+    public var defaultCenter: CLLocationCoordinate2D {
         return geocode?.location.coordinate  ?? kCLLocationCoordinate2DInvalid
     }
     
-    var isOk: Bool {
+    public var isOk: Bool {
         return CLLocationCoordinate2DIsValid(defaultCenter)
     }
     
-    var fromatDistance: String {
+    public var fromatDistance: String {
         guard let distance = distanceResult?.distance else {
             return "距离：--"
         }
@@ -35,7 +39,7 @@ struct NavgatorDetailModel {
         return "距离：\(r)千米"
     }
     
-    var fromatDuration: String {
+    public var fromatDuration: String {
         guard let duration = distanceResult?.duration else {
             return "预计(步行)：--"
         }
