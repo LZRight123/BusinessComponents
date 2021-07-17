@@ -17,44 +17,57 @@ public extension AMapGeoPoint {
 
 public extension DeerMapVC {
     /// 导航按钮 跳导航详情  需求： http://confluence.hbluguanjia.com/pages/viewpage.action?pageId=27951249
-    static func testJump(forAddress address: String, soureVC: UIViewController ) {
+    static func testJump(forAddress address: String, soureVC: UIViewController,  coordinate: CLLocationCoordinate2D? = nil) {
         soureVC.showLoading()
     
+        if address.isEmpty {
+            soureVC.hiddeLoading()
+            soureVC.showText("该用户地址信息有误，该功能不可用")
+            return
+        }
         // 同步请求 1，地理位置编码， 2，自己位置定位一次 3，距离计算
         var model = NavgatorDetailModel(address: address)
+        model.coordinate = coordinate
         let group = DispatchGroup()
         
         // 1
-        group.enter()
-        DeerLocationManager.shared.geoCodeSearch(address: address, completion: {  list in
-            model.geocode = list.first
-            group.leave()
-        })
+        if coordinate == nil  {
+            group.enter()
+            DeerLocationManager.shared.geoCodeSearch(address: address, completion: {  list in
+                model.coordinate = list.first?.location.coordinate
+                group.leave()
+            })
+        }
+       
         
         // 2
         group.enter()
         DeerLocationManager.shared.requestLocation { _, _, l in
-            if let location = l { // 定位成功 算距离
-                
-                DeerLocationManager.shared.distanceSearch(origin: location.coordinate, destination: CLLocationCoordinate2D(latitude: 31.645557454427085, longitude: 114.16105414496528)) { list in
-                    model.distanceResult = list.first
-                    group.leave()
-                }
-            } else {
-                group.leave()
-            }
+            group.leave()
         }
+       
         
         group.notify(queue: .main, execute: { [weak soureVC] in
-            soureVC?.hiddeLoading()
-            guard model.isOk else {
+            guard model.isOk, let location = DeerLocationManager.shared.location, let coor = model.coordinate else {
+                soureVC?.hiddeLoading()
                 soureVC?.showText("该用户地址信息有误，该功能不可用")
                 return
             }
-            let nextVC = DeerMapVC(model: model)
-            soureVC?.pushVC(nextVC)
+            
+            DeerLocationManager.shared.distanceSearch(origin: location.coordinate, destination: coor) { [weak soureVC] list in
+                model.distanceResult = list.first
+                
+                soureVC?.hiddeLoading()
+                let nextVC = DeerMapVC(model: model)
+                soureVC?.pushVC(nextVC)
+            }
+            
         })
     }
+    
+
+    
+    
 }
 
 open class DeerMapVC: UIViewController {
@@ -74,8 +87,9 @@ open class DeerMapVC: UIViewController {
         $0.btn.setTitleForAllStates("开始导航")
     }
     
+    ///请用类方法跳转
     let model: NavgatorDetailModel
-    public init(model: NavgatorDetailModel) {
+    init(model: NavgatorDetailModel) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
     }
@@ -88,6 +102,7 @@ open class DeerMapVC: UIViewController {
         super.viewDidLoad()
         title = "导航详情"
         
+        view.backgroundColor = .white
         mapView.frame = view.bounds
         view.add(mapView)
         
@@ -98,7 +113,7 @@ open class DeerMapVC: UIViewController {
         })
         wrapBtn.btn.rx.tap
             .subscribe(onNext: { [unowned self] in
-                NavigationTool.navigationWith(destinationName: self.model.address, sourceVC: self)
+                NavigationTool.navigationWith(destinationName: self.model.address, sourceVC: self, lat: self.model.coordinate?.latitude, lon: self.model.coordinate?.longitude)
             })
             .disposed(by: disposeBag)
         
@@ -130,7 +145,7 @@ extension DeerMapVC: MAMapViewDelegate {
         annotationView.isDraggable = true
 //        annotationView.rightCalloutAccessoryView = CallOutView()
         annotationView.pinColor = .red
-        annotationView.image = UIImage(named: "location268")
+//        annotationView.image = UIImage(named: "location268")
         
         
         var callView: CallOutView!
@@ -144,7 +159,7 @@ extension DeerMapVC: MAMapViewDelegate {
             custom.rightBtn.rx.tapGesture().when(.recognized)
                 .subscribe(onNext: { [weak self] _ in
                     guard let self = self else { return }
-                    NavigationTool.navigationWith(destinationName: self.model.address, sourceVC: self)
+                    NavigationTool.navigationWith(destinationName: self.model.address, sourceVC: self, lat: self.model.coordinate?.latitude, lon: self.model.coordinate?.longitude)
                 
                 })
                 .disposed(by: disposeBag)

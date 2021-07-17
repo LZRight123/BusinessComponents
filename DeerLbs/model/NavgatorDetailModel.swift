@@ -9,9 +9,9 @@ import Foundation
 import CoreLocation
 import SwiftComponents
 
-public struct NavgatorDetailModel {
+ struct NavgatorDetailModel {
     public var address = "" // 外传
-    public var geocode: AMapGeocode? //1 地址取point
+    public var coordinate: CLLocationCoordinate2D? //1 地址取point
     public var distanceResult: AMapDistanceResult?
     
     public init(address: String) {
@@ -19,7 +19,7 @@ public struct NavgatorDetailModel {
     }
     
     public var defaultCenter: CLLocationCoordinate2D {
-        return geocode?.location.coordinate  ?? kCLLocationCoordinate2DInvalid
+        return coordinate  ?? kCLLocationCoordinate2DInvalid
     }
     
     public var isOk: Bool {

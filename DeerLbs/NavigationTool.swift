@@ -22,7 +22,7 @@ public class NavigationTool: NSObject {
     static var bdStr: String?
     static var gdStr: String?
     
-    public static func navigationWith( srcName: String = "我的位置", destinationName: String, sourceVC: UIViewController) {
+    public static func navigationWith( srcName: String = "我的位置", destinationName: String, sourceVC: UIViewController, lat: CLLocationDegrees? = nil, lon: CLLocationDegrees? = nil) {
         
         if destinationName.count == 0 {
             sourceVC.showText("该用户未上传地址，无法使用导航。")
@@ -34,8 +34,11 @@ public class NavigationTool: NSObject {
             bdStr = bdUrlStr
         }
         if hasGaoDeApp {
-            let gdUrlStr = "iosamap://path?sourceApplication=鹿管家医生端&sname=\(srcName)&dname=\(destinationName)&t=0".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-            gdStr = gdUrlStr
+            var gdUrlStr = "iosamap://path?sourceApplication=鹿管家医生端&sname=\(srcName)&dname=\(destinationName)&t=0"
+            if let lat = lat, let lon = lon {
+                gdUrlStr = "\(gdUrlStr)&dlat=\(lat)&dlon=\(lon)"
+            }
+            gdStr = gdUrlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         }
         
         if (hasBaiduApp == true && hasGaoDeApp == true) {//弹框
